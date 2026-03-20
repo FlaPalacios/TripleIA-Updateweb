@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { content } from '@/config/content';
 
-import logoWhite from '@/assets/1logo_header_global.png';
-import logoColor from '@/assets/1logo_header.png';
+import logoWhite from '@/assets/LOGO_header.svg';
+import logoColor from '@/assets/LOGO_global.svg';
 
 export const Navbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +26,7 @@ export const Navbar: React.FC = () => {
                             <img
                                 src={isScrolled ? logoColor : logoWhite}
                                 alt="TRIPLE IA CONSULTORES"
-                                className="h-14 w-auto max-w-[180px] object-contain"
+                                className="h-56 w-auto max-w-[256px] object-contain"
                             />
                         </a>
                     </div>
