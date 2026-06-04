@@ -12,13 +12,14 @@ export const content = {
         slogan: "Innovación, Transformación Digital e Inteligencia Artificial",
         description: "Somos una firma de consultoría orientada a innovación, transformación digital, inteligencia artificial y ciencia de datos.",
         email: "contacto@tripleiaconsultores.com",
-        phone: "+51 991 762 127",
+        phone: "+51 956 307 219",
         location: "Lima, Perú - Madrid, España",
         schedule: "Lunes a Viernes, 9:00 AM - 6:00 PM",
         socials: {
             instagram: "https://www.instagram.com/triple_ia_consultores",
             linkedin: "https://www.linkedin.com/company/triple-ia-consultores/posts/?feedView=all",
-            tiktok: "https://www.tiktok.com/@triple.ia.innovation?lang=es"
+            tiktok: "https://www.tiktok.com/@triple.ia.innovation?lang=es",
+            whatsapp: "https://wa.me/51956307219"
         }
     },
     navigation: [
@@ -48,31 +49,31 @@ export const content = {
             title: "Identificación de oportunidades de financiamiento",
             description: "Scouting estratégico de fondos nacionales e internacionales para proyectos de I+D+i.",
             icon: Search,
-            formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScmas4AkBME72cIwBotqgyetak-ZviToymptO1fAFRRoj0uLg/viewform?usp=header", // Placeholder
+            formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScldxc2B_Og7UQuKkTrzz7appZEC2iK0iShpIDfT9z31fhh8Q/viewform",
         },
         {
             title: "Formulación de proyectos",
             description: "Diseño técnico, económico y estratégico de propuestas competitivas, alineadas a las bases de fondos concursables y objetivos institucionales.",
             icon: LayoutDashboard,
-            formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScmas4AkBME72cIwBotqgyetak-ZviToymptO1fAFRRoj0uLg/viewform?usp=header", // Placeholder
+            formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScldxc2B_Og7UQuKkTrzz7appZEC2iK0iShpIDfT9z31fhh8Q/viewform",
         },
         {
             title: "Asesoría y ejecución de proyectos financiados",
             description: "Acompañamiento integral en la gestión, ejecución, monitoreo y cumplimiento de hitos técnicos y financieros de proyectos adjudicados.",
             icon: Rocket,
-            formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScmas4AkBME72cIwBotqgyetak-ZviToymptO1fAFRRoj0uLg/viewform?usp=header", // Placeholder
+            formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScldxc2B_Og7UQuKkTrzz7appZEC2iK0iShpIDfT9z31fhh8Q/viewform",
         },
         {
             title: "Capacitación en Innovación e IA",
             description: "Programas y talleres especializados para el fortalecimiento de capacidades en innovación, IA y toma de decisiones basadas en datos.",
             icon: GraduationCap,
-            formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSctG8ZkZjgvpZoaENxs0qllW4bKHCGfKDW1KewT9dULzS1gnA/viewform?usp=header", // Placeholder
+            formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScldxc2B_Og7UQuKkTrzz7appZEC2iK0iShpIDfT9z31fhh8Q/viewform",
         },
         {
             title: "Consultorías especializadas en IA",
             description: "Diseño e implementación de soluciones analíticas, modelos predictivos y sistemas inteligentes orientados a resultados de negocio.",
             icon: BrainCircuit,
-            formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSctG8ZkZjgvpZoaENxs0qllW4bKHCGfKDW1KewT9dULzS1gnA/viewform?usp=header", // Placeholder
+            formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScldxc2B_Og7UQuKkTrzz7appZEC2iK0iShpIDfT9z31fhh8Q/viewform",
         },
     ],
     projects: [
@@ -89,7 +90,7 @@ export const content = {
         // Add more mock projects as needed
     ],
     contact: {
-        formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScldxc2B_Og7UQuKkTrzz7appZEC2iK0iShpIDfT9z31fhh8Q/viewform?usp=dialog", // Placeholder Google Form
+        formUrl: "https://docs.google.com/forms/d/e/1FAIpQLScldxc2B_Og7UQuKkTrzz7appZEC2iK0iShpIDfT9z31fhh8Q/viewform",
         calendlyUrl: "https://calendly.com/", // Placeholder Calendly
     },
     observatory: {
