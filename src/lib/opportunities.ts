@@ -1,8 +1,14 @@
-import csvSource from "../../public/data/oportunidades.csv?raw";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import type {
   DeadlineStatus,
   Opportunity,
 } from "../features/opportunities/types";
+
+const csvSource = readFileSync(
+  join(process.cwd(), "public", "data", "oportunidades.csv"),
+  "utf8",
+);
 
 const monthNumbers: Record<string, string> = {
   Jan: "01",

@@ -15,8 +15,12 @@
 
 # next.js
 /.next/
-/.vinext/
 /out/
+
+# Local build artifacts from previous tooling
+/.vinext/
+/.wrangler/
+/dist/
 
 # misc
 .DS_Store
@@ -34,8 +38,6 @@ yarn-error.log*
 # vercel
 .vercel
 
-/dist/
-/.wrangler/
 /outputs/
 /work/
 *.tsbuildinfo

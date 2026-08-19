@@ -112,7 +112,7 @@ Mantener:
 
 - React
 - TypeScript
-- Vite
+- Next.js (App Router)
 - Tailwind CSS
 
 Puede agregarse:
@@ -1174,7 +1174,7 @@ La lógica de oportunidades debe estar desacoplada de la capa visual.
 
 La primera versión se considera satisfactoria cuando:
 
-- el proyecto corre correctamente con Vite;
+- el proyecto corre correctamente con Next.js;
 - el repositorio anterior no fue modificado;
 - la identidad visual utiliza la nueva paleta;
 - el home comunica claramente qué hace Triple IA;
