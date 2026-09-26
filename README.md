@@ -1,26 +1,32 @@
-# Triple IA Consultores
+# React + TypeScript + Vite
 
-Sitio web de Triple IA Consultores, construido con el App Router de Next.js.
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-## Prerequisites
+Currently, two official plugins are available:
 
-- Node.js `>=22.13.0`
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Quick Start
+## React Compiler
 
-```bash
-npm install
-npm run dev
-npm run build
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the Oxlint configuration
+
+If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+
+```json
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "options": {
+    "typeAware": true
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
 ```
 
-## Useful Commands
-
-- `npm run dev`: start local development
-- `npm run build`: create the production build
-- `npm run start`: serve the production build
-
-## Deployment
-
-The project is ready to deploy on Vercel with its default Next.js settings. Do
-not set a custom Output Directory.
+See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.

@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-blue: #202d4f;
+  --color-blue-light: #2f4066;
+  --color-blue-lighter: #445685;
+  --color-blue-dark: #141c33;
+  --color-blue-muted: #5b6478;
+
+  /* beige: textos y acentos · sand: fondos de sección y paneles */
+  --color-beige: #d1bd9b;
+  --color-beige-light: #e4d8c3;
+  --color-sand: #d1c2a5;
+
+  --color-off-white: #ebebeb;
+  --color-black: #1a1a1a;
+
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-drift: drift 14s ease-in-out infinite;
+  --animate-drift-slow: drift 20s ease-in-out infinite reverse;
+  --animate-sweep: sweep 4s linear infinite;
+  --animate-blip: blip 4s ease-out infinite;
+  --animate-shine: shine 6s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(40px, -30px) scale(1.08);
+    }
+    66% {
+      transform: translate(-30px, 25px) scale(0.95);
+    }
+  }
+
+  @keyframes sweep {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes blip {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    10% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    60% {
+      opacity: 0.25;
+    }
+  }
+
+  @keyframes shine {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--color-black);
+    background: var(--color-off-white);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
