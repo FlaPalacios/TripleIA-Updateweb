@@ -4,32 +4,9 @@ import { services } from "../data/site";
 import { ServiceIcon } from "../components/services/ServiceIcon";
 import { PageHeader } from "../components/ui/PageHeader";
 import { Container } from "../components/ui/Container";
-import { SectionHeader } from "../components/ui/SectionHeader";
 import { Button } from "../components/ui/Button";
 import { Reveal } from "../components/ui/Reveal";
 import { FinalCta } from "../components/home/FinalCta";
-
-const PROCESS = [
-  {
-    title: "Identificamos",
-    description:
-      "Encontramos el fondo o la oportunidad que mejor encaja con tu organización.",
-  },
-  {
-    title: "Formulamos",
-    description: "Diseñamos una propuesta técnica y económica competitiva.",
-  },
-  {
-    title: "Acompañamos",
-    description:
-      "Gestionamos la ejecución, los hitos y las rendiciones del proyecto.",
-  },
-  {
-    title: "Fortalecemos",
-    description:
-      "Transferimos capacidades en innovación, datos e IA a tu equipo.",
-  },
-];
 
 export function ServicesPage() {
   return (
@@ -113,35 +90,6 @@ export function ServicesPage() {
               </div>
             );
           })}
-        </Container>
-      </section>
-
-      <section className="bg-sand py-20 lg:py-28">
-        <Container>
-          <Reveal>
-            <SectionHeader
-              tone="beige"
-              eyebrow="Cómo trabajamos"
-              title="Un mismo equipo en todo el ciclo"
-            />
-          </Reveal>
-          <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {PROCESS.map((step, index) => (
-              <Reveal key={step.title} delay={index * 0.08}>
-                <li className="relative h-full rounded-3xl bg-off-white/70 p-6 transition-all duration-500 hover:-translate-y-1.5 hover:bg-off-white">
-                  <span className="font-display text-5xl font-extrabold text-blue/15">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-3 text-xl font-bold text-blue">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-blue-light">
-                    {step.description}
-                  </p>
-                </li>
-              </Reveal>
-            ))}
-          </ol>
         </Container>
       </section>
 

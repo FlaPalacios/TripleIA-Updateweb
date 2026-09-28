@@ -32,7 +32,7 @@ export function AboutPage() {
             {team.map((member, index) => (
               <Reveal key={member.name} delay={index * 0.08}>
                 <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-blue/10 bg-off-white transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl">
-                  <div className="aspect-[4/5] overflow-hidden bg-sand">
+                  <div className="aspect-square overflow-hidden bg-white">
                     <img
                       src={member.photo}
                       alt={`Retrato de ${member.name}`}

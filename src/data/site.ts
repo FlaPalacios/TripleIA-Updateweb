@@ -67,7 +67,11 @@ export interface TeamMember {
 export interface Training {
   title: string;
   description: string;
-  topics: string[];
+  /** Fecha en formato AAAA-MM-DD. Si ya pasó, se muestra como "Realizada". */
+  date: string;
+  modality: string;
+  /** Imagen de la capacitación (proporción aprox. 16:9). */
+  image?: string;
 }
 
 export const navLinks: NavLink[] = [
@@ -104,6 +108,34 @@ export const pillars: Pillar[] = [
 ];
 
 export const services: Service[] = [
+  {
+    slug: "capacitacion",
+    title: "Capacitación en Innovación e IA",
+    shortTitle: "Capacitación",
+    description:
+      "Programas y talleres especializados para el fortalecimiento de capacidades en innovación, IA y toma de decisiones basadas en datos.",
+    href: "/capacitaciones",
+    cta: "Ver capacitaciones",
+    includes: [
+      "Talleres de formulación de proyectos e innovación",
+      "Programas de IA y toma de decisiones basadas en datos",
+      "Programas a medida para instituciones y empresas",
+    ],
+  },
+  {
+    slug: "consultoria-ia",
+    title: "Consultorías especializadas en IA",
+    shortTitle: "Consultoría en IA",
+    description:
+      "Diseño e implementación de soluciones analíticas, modelos predictivos y sistemas inteligentes orientados a resultados de negocio.",
+    href: "/#contacto",
+    cta: "Conversemos",
+    includes: [
+      "Diagnóstico de datos y oportunidades de automatización",
+      "Modelos predictivos y analítica avanzada",
+      "Soluciones con IA generativa y sistemas inteligentes",
+    ],
+  },
   {
     slug: "fondos",
     title: "Identificación de oportunidades de financiamiento",
@@ -145,34 +177,6 @@ export const services: Service[] = [
       "Gestión y monitoreo de hitos técnicos y financieros",
       "Preparación de informes técnicos y rendiciones de cuentas",
       "Soporte en la relación con la entidad financiadora",
-    ],
-  },
-  {
-    slug: "capacitacion",
-    title: "Capacitación en Innovación e IA",
-    shortTitle: "Capacitación",
-    description:
-      "Programas y talleres especializados para el fortalecimiento de capacidades en innovación, IA y toma de decisiones basadas en datos.",
-    href: "/capacitaciones",
-    cta: "Ver capacitaciones",
-    includes: [
-      "Talleres de formulación de proyectos e innovación",
-      "Programas de IA y toma de decisiones basadas en datos",
-      "Programas a medida para instituciones y empresas",
-    ],
-  },
-  {
-    slug: "consultoria-ia",
-    title: "Consultorías especializadas en IA",
-    shortTitle: "Consultoría en IA",
-    description:
-      "Diseño e implementación de soluciones analíticas, modelos predictivos y sistemas inteligentes orientados a resultados de negocio.",
-    href: "/#contacto",
-    cta: "Conversemos",
-    includes: [
-      "Diagnóstico de datos y oportunidades de automatización",
-      "Modelos predictivos y analítica avanzada",
-      "Soluciones con IA generativa y sistemas inteligentes",
     ],
   },
 ];
@@ -222,49 +226,48 @@ export const team: TeamMember[] = [
     name: "Fernando Cárdenas",
     role: "CEO",
     bio: "Ingeniero Industrial con más de 10 años de experiencia liderando la formulación y ejecución de proyectos financiados por CONCYTEC, ProCiencia y USAID.",
-    photo: "/assets/team/fernando-tripleia.jpg",
-    photoPosition: "center 24%",
+    photo: "/assets/team/fernando-tripleia.webp",
+    photoPosition: "center top",
   },
   {
     name: "Katherine Cárdenas",
     role: "Abogada Tributarista",
     bio: "Responsable de la asesoría legal y tributaria de la consultora, así como del soporte normativo para los proyectos de nuestros clientes.",
-    photo: "/assets/team/katherine-tripleia.jpg",
-    photoPosition: "center 22%",
+    photo: "/assets/team/katherine-tripleia.webp",
+    photoPosition: "center top",
   },
   {
     name: "Max Escalante",
     role: "Marketing, Innovación y Gestión de Proyectos",
     bio: "Desarrolla contenidos, analiza información y participa en la gestión de proyectos e iniciativas de innovación de la consultora.",
-    photo: "/assets/team/max-tripleia.jpg",
-    photoPosition: "center 18%",
+    photo: "/assets/team/max-tripleia.webp",
+    photoPosition: "center top",
   },
   {
     name: "Flavio Palacios",
     role: "Desarrollo Web, Automatización e IA",
     bio: "Desarrolla soluciones web, automatizaciones y herramientas de inteligencia artificial para los proyectos y servicios de Triple IA.",
-    photo: "/assets/team/flavio-tripleia.png",
-    photoPosition: "center 30%",
+    photo: "/assets/team/flavio-tripleia.webp",
+    photoPosition: "center top",
   },
 ];
 
+// Capacitaciones realizadas y próximas. Para anunciar una nueva, agrégala
+// aquí: el estado (Realizada / Próxima) se calcula solo según la fecha.
 export const trainings: Training[] = [
   {
-    title: "Formulación de proyectos para fondos concursables",
+    title: "De preguntas a soluciones: Domina Claude",
     description:
-      "Aprende a identificar convocatorias, leer bases y estructurar propuestas técnicas y económicas competitivas.",
-    topics: ["Lectura de bases", "Marco lógico", "Presupuesto", "Criterios de evaluación"],
-  },
-  {
-    title: "Innovación abierta e investigación aplicada",
-    description:
-      "Herramientas para conectar necesidades, capacidades y oportunidades, y convertir conocimiento en proyectos concretos.",
-    topics: ["Gestión de la innovación", "Vinculación academia-empresa", "Transferencia tecnológica"],
-  },
-  {
-    title: "Inteligencia artificial para la toma de decisiones",
-    description:
-      "Uso práctico de IA y ciencia de datos para mejorar procesos, analizar información y decidir con evidencia.",
-    topics: ["IA generativa", "Automatización", "Análisis de datos"],
+      "Taller práctico para aprovechar Claude en el trabajo diario: formular buenas preguntas, analizar información y convertir ideas en soluciones con IA.",
+    date: "2026-09-30",
+    modality: "Virtual",
+    image: "/assets/trainings/sesion-01-domina-claude.webp",
   },
 ];
+
+/** Video de TikTok destacado en la página de Capacitaciones. */
+export const tiktokHighlight = {
+  videoId: "7687014906750618898",
+  url: "https://www.tiktok.com/@triple.ia.innovation/video/7687014906750618898",
+  profileUrl: "https://www.tiktok.com/@triple.ia.innovation",
+};

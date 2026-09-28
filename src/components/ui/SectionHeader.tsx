@@ -6,7 +6,15 @@ interface SectionHeaderProps {
   /** "dark" para fondos azules, "beige" para fondos sand (#D1C2A5). */
   tone?: "light" | "dark" | "beige";
   as?: "h1" | "h2";
+  /** Tamaño del título; por defecto "lg" para h1 y "md" para h2. */
+  size?: "sm" | "md" | "lg";
 }
+
+const TITLE_SIZES = {
+  sm: "text-3xl sm:text-4xl",
+  md: "text-4xl sm:text-5xl",
+  lg: "text-4xl sm:text-5xl lg:text-6xl",
+};
 
 const TONES = {
   light: { eyebrow: "text-blue-muted", rule: "bg-beige", title: "text-blue", body: "text-blue-muted" },
@@ -21,6 +29,7 @@ export function SectionHeader({
   align = "left",
   tone = "light",
   as: Heading = "h2",
+  size = Heading === "h1" ? "lg" : "md",
 }: SectionHeaderProps) {
   const alignment = align === "center" ? "text-center mx-auto" : "text-left";
   const colors = TONES[tone];
@@ -36,9 +45,7 @@ export function SectionHeader({
         </p>
       )}
       <Heading
-        className={`text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl ${
-          Heading === "h1" ? "lg:text-6xl" : ""
-        } ${colors.title}`}
+        className={`font-bold leading-[1.08] tracking-tight ${TITLE_SIZES[size]} ${colors.title}`}
       >
         {title}
       </Heading>
