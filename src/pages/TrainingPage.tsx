@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, CalendarDays, MonitorPlay, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, MonitorPlay, Sparkles } from "lucide-react";
 import { tiktokHighlight, trainings, type Training } from "../data/site";
 import { startOfToday } from "../lib/utils";
 import { PageHeader } from "../components/ui/PageHeader";
@@ -22,31 +22,70 @@ const COMING_SOON = [
   },
 ];
 
-type Status = "past" | "today" | "upcoming";
+type SessionStatus = "past" | "today" | "upcoming";
+type CourseStatus = "upcoming" | "today" | "ongoing" | "past";
 
 function parseDate(iso: string): Date {
   const [year, month, day] = iso.split("-").map(Number);
   return new Date(year, month - 1, day);
 }
 
-function statusOf(training: Training, today: Date): Status {
-  const diff = parseDate(training.date).getTime() - today.getTime();
+function sessionStatus(iso: string, today: Date): SessionStatus {
+  const diff = parseDate(iso).getTime() - today.getTime();
   if (diff < 0) return "past";
   return diff === 0 ? "today" : "upcoming";
 }
 
-const STATUS_LABEL: Record<Status, string> = {
-  past: "Realizada",
-  today: "Hoy",
+function courseStatus(statuses: SessionStatus[]): CourseStatus {
+  if (statuses.includes("today")) return "today";
+  if (statuses.every((s) => s === "past")) return "past";
+  if (statuses.every((s) => s === "upcoming")) return "upcoming";
+  return "ongoing";
+}
+
+const COURSE_LABEL: Record<CourseStatus, string> = {
   upcoming: "Próxima",
+  today: "Hoy",
+  ongoing: "En curso",
+  past: "Realizada",
 };
 
-function TrainingCard({ training, status }: { training: Training; status: Status }) {
-  const date = parseDate(training.date).toLocaleDateString("es-PE", {
+/** "Miércoles 30 de setiembre" */
+function formatSession(iso: string): string {
+  const text = parseDate(iso).toLocaleDateString("es-PE", {
+    weekday: "long",
     day: "numeric",
     month: "long",
-    year: "numeric",
   });
+  return (text.charAt(0).toUpperCase() + text.slice(1)).replace(",", "");
+}
+
+function sessionLabel(status: SessionStatus, isFinal: boolean): string {
+  if (status === "past") return "Realizada";
+  if (status === "today") return "Hoy";
+  return isFinal ? "Última sesión" : "Próxima";
+}
+
+function LiveDot({ dark = false }: { dark?: boolean }) {
+  const color = dark ? "bg-blue" : "bg-beige";
+  return (
+    <span className="relative flex h-2 w-2">
+      <span className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${color}`} />
+      <span className={`relative inline-flex h-2 w-2 rounded-full ${color}`} />
+    </span>
+  );
+}
+
+interface TrainingCardProps {
+  training: Training;
+  sessions: { date: string; status: SessionStatus }[];
+  status: CourseStatus;
+}
+
+function TrainingCard({ training, sessions, status }: TrainingCardProps) {
+  const done = sessions.filter((s) => s.status === "past").length;
+  const nextIndex = sessions.findIndex((s) => s.status !== "past");
+  const multi = sessions.length > 1;
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-3xl bg-off-white transition-all duration-500 hover:-translate-y-1.5 hover:bg-white hover:shadow-2xl">
@@ -65,35 +104,75 @@ function TrainingCard({ training, status }: { training: Training; status: Status
         )}
         <span
           className={`absolute left-4 top-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold shadow-lg ${
-            status === "past" ? "bg-sand text-blue" : "bg-blue text-beige"
+            status === "past" ? "bg-sand text-blue" : "bg-beige text-blue"
           }`}
         >
-          {status !== "past" && (
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-beige opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-beige" />
-            </span>
-          )}
-          {STATUS_LABEL[status]}
+          {status !== "past" && <LiveDot dark />}
+          {COURSE_LABEL[status]}
         </span>
       </div>
 
       <div className="flex flex-1 flex-col p-7">
         <h3 className="text-xl font-bold leading-snug text-blue">{training.title}</h3>
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-blue-muted">{training.description}</p>
+        <p className="mt-3 text-sm leading-relaxed text-blue-muted">{training.description}</p>
 
-        <dl className="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-t border-blue/10 pt-5 text-sm text-blue">
-          <div className="flex items-center gap-2">
-            <dt className="sr-only">Fecha</dt>
-            <CalendarDays size={16} className="text-blue-muted" aria-hidden="true" />
-            <dd>{date}</dd>
+        <div className="mt-6 flex-1 border-t border-blue/10 pt-5">
+          <div className="mb-4 flex items-center justify-between text-xs font-semibold text-blue-light">
+            <span>
+              {multi
+                ? `${done} de ${sessions.length} sesiones realizadas`
+                : done === 1
+                  ? "Sesión realizada"
+                  : "Sesión única"}
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <MonitorPlay size={14} aria-hidden="true" />
+              {training.modality}
+            </span>
           </div>
-          <div className="flex items-center gap-2">
-            <dt className="sr-only">Modalidad</dt>
-            <MonitorPlay size={16} className="text-blue-muted" aria-hidden="true" />
-            <dd>{training.modality}</dd>
-          </div>
-        </dl>
+          {multi && (
+            <div className="-mt-2 mb-5 h-1.5 overflow-hidden rounded-full bg-sand/60">
+              <div
+                className="h-full rounded-full bg-blue transition-all duration-700"
+                style={{ width: `${(done / sessions.length) * 100}%` }}
+              />
+            </div>
+          )}
+
+          <ol className="relative flex flex-col gap-3">
+            {multi && (
+              <span aria-hidden="true" className="absolute bottom-3 left-[11px] top-3 w-px bg-blue/15" />
+            )}
+            {sessions.map((session, index) => {
+              const past = session.status === "past";
+              const isNext = index === nextIndex;
+              return (
+                <li key={session.date} className="relative flex items-center gap-3">
+                  <span
+                    className={`relative z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${
+                      past
+                        ? "bg-sand text-blue"
+                        : isNext
+                          ? "bg-blue text-beige ring-4 ring-beige/40"
+                          : "border-2 border-blue/25 bg-off-white"
+                    }`}
+                  >
+                    {past ? <Check size={13} strokeWidth={3} aria-hidden="true" /> : isNext ? <LiveDot /> : null}
+                  </span>
+                  <div className="flex min-w-0 flex-1 flex-col">
+                    <p className={`text-sm ${past ? "text-blue-muted" : "font-semibold text-blue"}`}>
+                      {multi && <span className="font-semibold">Sesión {index + 1} · </span>}
+                      {formatSession(session.date)}
+                    </p>
+                    <span className={`text-xs font-semibold ${past ? "text-blue-muted" : "text-blue"}`}>
+                      {sessionLabel(session.status, multi && index === sessions.length - 1)}
+                    </span>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
       </div>
     </article>
   );
@@ -111,12 +190,23 @@ function ComingSoonCard({ title, description }: { title: string; description: st
           <Sparkles size={28} />
         </span>
       </div>
-      <div className="p-7">
+      <div className="flex flex-1 flex-col p-7">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-light">
           Próximamente
         </p>
         <h3 className="mt-2 text-xl font-bold leading-snug text-blue">{title}</h3>
         <p className="mt-3 text-sm leading-relaxed text-blue-muted">{description}</p>
+        <a
+          href="#tiktok"
+          className="group/link mt-auto inline-flex items-center gap-1.5 pt-6 text-sm font-semibold text-blue underline-offset-4 hover:underline"
+        >
+          Enterarme en TikTok
+          <ArrowRight
+            size={14}
+            aria-hidden="true"
+            className="transition-transform duration-300 group-hover/link:translate-x-1"
+          />
+        </a>
       </div>
     </article>
   );
@@ -171,11 +261,17 @@ function TikTokSection() {
 
 export function TrainingPage() {
   const today = startOfToday();
-  // Orden cronológico: realizadas → próximas → avisos de "Próximamente".
-  const items = [...trainings]
-    .sort((a, b) => a.date.localeCompare(b.date))
-    .map((training) => ({ training, status: statusOf(training, today) }));
-  const upcomingCount = items.filter((item) => item.status !== "past").length;
+  // Orden cronológico por la primera sesión, seguido de los avisos de "Próximamente".
+  const items = trainings
+    .map((training) => {
+      const sessions = [...training.sessions]
+        .sort()
+        .map((date) => ({ date, status: sessionStatus(date, today) }));
+      return { training, sessions, status: courseStatus(sessions.map((s) => s.status)) };
+    })
+    .sort((a, b) => a.sessions[0].date.localeCompare(b.sessions[0].date));
+  // Solo los cursos que aún no empiezan reemplazan a los avisos.
+  const upcomingCount = items.filter((item) => item.status === "upcoming").length;
   const placeholders = COMING_SOON.slice(0, Math.max(0, MIN_UPCOMING - upcomingCount));
 
   return (
@@ -198,9 +294,9 @@ export function TrainingPage() {
           </Reveal>
 
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {items.map(({ training, status }, index) => (
+            {items.map(({ training, sessions, status }, index) => (
               <Reveal key={training.title} delay={index * 0.08}>
-                <TrainingCard training={training} status={status} />
+                <TrainingCard training={training} sessions={sessions} status={status} />
               </Reveal>
             ))}
             {placeholders.map((item, index) => (

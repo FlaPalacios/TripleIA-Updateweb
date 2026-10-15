@@ -67,8 +67,9 @@ export interface TeamMember {
 export interface Training {
   title: string;
   description: string;
-  /** Fecha en formato AAAA-MM-DD. Si ya pasó, se muestra como "Realizada". */
-  date: string;
+  /** Fechas de cada sesión (AAAA-MM-DD). El estado de cada sesión y del
+   * curso (Próxima / En curso / Realizada) se calcula solo según la fecha. */
+  sessions: string[];
   modality: string;
   /** Imagen de la capacitación (proporción aprox. 16:9). */
   image?: string;
@@ -253,13 +254,13 @@ export const team: TeamMember[] = [
 ];
 
 // Capacitaciones realizadas y próximas. Para anunciar una nueva, agrégala
-// aquí: el estado (Realizada / Próxima) se calcula solo según la fecha.
+// aquí; para sumar una sesión a un curso, añade su fecha en `sessions`.
 export const trainings: Training[] = [
   {
     title: "De preguntas a soluciones: Domina Claude",
     description:
       "Taller práctico para aprovechar Claude en el trabajo diario: formular buenas preguntas, analizar información y convertir ideas en soluciones con IA.",
-    date: "2026-09-30",
+    sessions: ["2026-09-30", "2026-10-10", "2026-10-28"],
     modality: "Virtual",
     image: "/assets/trainings/sesion-01-domina-claude.webp",
   },
