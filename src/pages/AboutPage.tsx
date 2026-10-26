@@ -1,7 +1,7 @@
 import { MapPin } from "lucide-react";
 import { about, company, team } from "../data/site";
 import { PageHeader } from "../components/ui/PageHeader";
-import { Pillars } from "../components/home/Pillars";
+import { MissionVision } from "../components/about/MissionVision";
 import { Container } from "../components/ui/Container";
 import { SectionHeader } from "../components/ui/SectionHeader";
 import { Reveal } from "../components/ui/Reveal";
@@ -16,7 +16,7 @@ export function AboutPage() {
         </p>
       </PageHeader>
 
-      <Pillars />
+      <MissionVision />
 
       <section id="equipo" className="scroll-mt-20 bg-white py-20 lg:py-28">
         <Container>

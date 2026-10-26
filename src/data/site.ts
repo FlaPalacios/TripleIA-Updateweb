@@ -91,6 +91,13 @@ export const about = {
     "Somos una firma de consultoría especializada en el diseño, formulación y ejecución de proyectos de innovación, investigación aplicada e inteligencia artificial para organizaciones públicas y privadas. Trabajamos bajo un enfoque integral basado en tres pilares estratégicos, con el propósito de ser el aliado estratégico de las organizaciones en la captación y gestión de fondos concursables, así como en el desarrollo de proyectos tecnológicos de alto impacto, generando valor económico, social y ambiental con estándares de excelencia.",
 };
 
+export const purpose = {
+  mission:
+    "Acercar la inteligencia artificial a personas y organizaciones, ayudándolas a entenderla y usarla de forma práctica, responsable y con impacto real en su trabajo y su día a día.",
+  vision:
+    "Ser un referente en Latinoamérica en la adopción de inteligencia artificial, impulsando una región donde la IA sea una herramienta accesible para crecer, innovar y crear oportunidades.",
+};
+
 export const pillars: Pillar[] = [
   {
     title: "Innovación abierta",
