@@ -93,9 +93,9 @@ export const about = {
 
 export const purpose = {
   mission:
-    "Acercar la inteligencia artificial a personas y organizaciones, ayudándolas a entenderla y usarla de forma práctica, responsable y con impacto real en su trabajo y su día a día.",
+    "Democratizar el acceso a la inteligencia artificial y al financiamiento para la innovación, formando a personas e instituciones para usar la IA con impacto y convertir sus ideas en proyectos financiados.",
   vision:
-    "Ser un referente en Latinoamérica en la adopción de inteligencia artificial, impulsando una región donde la IA sea una herramienta accesible para crecer, innovar y crear oportunidades.",
+    "Ser el referente en Latinoamérica en IA y proyectos de innovación, logrando que la tecnología y los fondos lleguen a todas las regiones, incluidas las más alejadas de los centros de poder.",
 };
 
 export const pillars: Pillar[] = [
